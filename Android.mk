@@ -99,8 +99,7 @@ LOCAL_CFLAGS += \
   -Dgenerate_uuid=busybox_generate_uuid
 LOCAL_MODULE := libbusybox
 LOCAL_MODULE_TAGS := eng
-LOCAL_STATIC_LIBRARIES := libclearsilverregex libcutils libc libm
-$(LOCAL_MODULE): busybox_prepare
+LOCAL_STATIC_LIBRARIES += busybox_prepare libclearsilverregex libcutils libc libm
 include $(BUILD_STATIC_LIBRARY)
 
 
@@ -115,8 +114,9 @@ LOCAL_CFLAGS := $(BUSYBOX_CFLAGS)
 LOCAL_MODULE := busybox
 LOCAL_MODULE_TAGS := eng
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
-LOCAL_STATIC_LIBRARIES := libclearsilverregex
-$(LOCAL_MODULE): busybox_prepare
+LOCAL_STATIC_LIBRARIES += busybox_prepare libclearsilverregex
+LOCAL_STATIC_LIBRARIES += libreboot
+LOCAL_CFLAGS += -DCYANOGEN_LIBREBOOT
 include $(BUILD_EXECUTABLE)
 
 BUSYBOX_LINKS := $(shell cat $(LOCAL_PATH)/busybox-$(BUSYBOX_CONFIG).links)
